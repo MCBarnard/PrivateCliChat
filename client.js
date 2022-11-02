@@ -57,8 +57,8 @@ socket.on('message', function (data) {
 });
 
 socket.on('vote', question => {
-    console_out(color("Type y/n", "cyan"));
-    rl.question(question + "\n", answer => {
+    console_out(color("Type y/n", "green"));
+    rl.question(question + "   ", answer => {
         socket.emit('poll-response', { question: question, answer: answer, user: username });
         rl.prompt(true);
     });
@@ -107,7 +107,7 @@ function chat_command(cmd, arg) {
             const exit = username + " has left the room";
             socket.emit('send', { type: 'exit', message: exit });
             socket.disconnect();
-            console.log("Bye bye...")
+            console_out(color("Bye bye...", "red"));
             process.exit();
             break;
 

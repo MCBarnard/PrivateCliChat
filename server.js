@@ -53,7 +53,7 @@ io.on('connection', socket => {
             });
             votes = [];
             voteTotal = 0;
-            const msg = { type: 'polled', message: `Poll results are: \nyes: ${yes}\nno: ${no}\nincorrect answer: ${incorrectAnswer}` }
+            const msg = { type: 'polled', message: `Poll results are: \nyes: ${yes}\nno: ${no}\ninvalid answer: ${incorrectAnswer}` }
             console.log(votes)
             console.log(msg)
             io.emit('message', msg);
