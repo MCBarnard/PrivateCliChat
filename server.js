@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const config = require('./config.json')
 
 const ngrok = require('ngrok');
-const token ='';
-ngrok.authtoken(token);
+
+ngrok.authtoken(config.ngrok_token);
 
 (async function() {
     const url = await ngrok.connect(11111);

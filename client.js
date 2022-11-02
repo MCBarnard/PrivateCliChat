@@ -2,10 +2,10 @@ const readline = require('readline');
 const { io } = require("socket.io-client");
 const util = require('util');
 const color = require("ansi-color").set;
-
+const config = require('./config.json')
 
 let username;
-const socket = io('https://5b01-41-160-230-182.ngrok.io');
+const socket = io(config.ngrok_url);
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 // Set the username
@@ -38,6 +38,9 @@ socket.on('message', function (data) {
     else if (data.type === "exit") {
         console_out(color(data.message, 'red'));
     }
+    else if (data.type === "help") {
+        console_out(color(data.message, 'white'));
+    }
     else if (data.type === "notice") {
         console_out(color(data.message, 'cyan'));
     }
@@ -59,6 +62,17 @@ function console_out(msg) {
 
 function chat_command(cmd, arg) {
     switch (cmd) {
+
+        case 'help':
+            const help = "The following commands are available: \n" +
+                "/userchange name     This will change your display username" +
+                "/msg Bob Hi Bob      Sends a message directly to bob" +
+                "/me has done it!     Broadcasts a special message" +
+                "/exit                Exits the room";
+            username = arg;
+            console.log(help);
+            // socket.emit('send', { type: 'help', message: help });
+            break;
 
         case 'userchange':
             const notice = username + " changed their name to " + arg;
