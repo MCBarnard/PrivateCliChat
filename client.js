@@ -75,14 +75,14 @@ function chat_command(cmd, arg) {
     switch (cmd) {
         case 'help':
                 console_out(color("The following commands are available:", "yellow"));
-                console_out(color("/userchange name", "red") + color("       This will change your display username", "green"));
+                console_out(color("/nickname name", "red") + color("         This will change your display username", "green"));
                 console_out(color("/msg Bob Hi Bob", "red") + color("        Sends a message directly to bob", "green"));
                 console_out(color("/me has done it!", "red") + color("       Broadcasts a special message", "green"));
                 console_out(color("/vote Shall we do it?", "red") + color("  Starts a poll", "green"));
                 console_out(color("/exit", "red") + color("                  Exits the room", "green"));
             break;
 
-        case 'userchange':
+        case 'nickname':
             const notice = username + " changed their name to " + arg;
             username = arg;
             socket.emit('send', { type: 'notice', message: notice });
