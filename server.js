@@ -2,13 +2,11 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const config = require("/config.json");
 
 // Listen on port 11111
 const PORT = process.env.PORT || 11111;
 server.listen(PORT, () => {
     console.log(`server running at http://0.0.0.0:${PORT}`);
-    console.log(`Clients can connect to ${config.url}`);
 });
 
 io.on('connection', socket => {
