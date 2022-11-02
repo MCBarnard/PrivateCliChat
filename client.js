@@ -2,7 +2,7 @@ const readline = require('readline');
 const { io } = require("socket.io-client");
 const util = require('util');
 const color = require("ansi-color").set;
-const config = require('./config.json')
+const config = require('./config.json');
 
 let username;
 const socket = io(config.url);
