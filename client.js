@@ -1,6 +1,5 @@
 const readline = require('readline');
 const { io } = require("socket.io-client");
-const util = require('util');
 const color = require("ansi-color").set;
 const config = require('./config.json');
 
@@ -50,8 +49,19 @@ socket.on('message', function (data) {
         console_out(leader + data.message);
     }
     else if (data.type === "emote") {
-        console_out(color(data.message, "cyan"));
+        console_out(color(data.message, "magenta"));
     }
+    else if (data.type === "polled") {
+        console_out(color(data.message, "yellow"));
+    }
+});
+
+socket.on('vote', question => {
+    console_out(color("Type y/n", "cyan"));
+    rl.question(question + "\n", answer => {
+        socket.emit('poll-response', { question: question, answer: answer, user: username });
+        rl.prompt(true);
+    });
 });
 
 function console_out(msg) {
@@ -65,10 +75,11 @@ function chat_command(cmd, arg) {
     switch (cmd) {
         case 'help':
                 console_out(color("The following commands are available:", "yellow"));
-                console_out(color("/userchange name", "red") + color("     This will change your display username", "green"));
-                console_out(color("/msg Bob Hi Bob", "red") + color("      Sends a message directly to bob", "green"));
-                console_out(color("/me has done it!", "red") + color("     Broadcasts a special message", "green"));
-                console_out(color("/exit", "red") + color("                Exits the room", "green"));
+                console_out(color("/userchange name", "red") + color("       This will change your display username", "green"));
+                console_out(color("/msg Bob Hi Bob", "red") + color("        Sends a message directly to bob", "green"));
+                console_out(color("/me has done it!", "red") + color("       Broadcasts a special message", "green"));
+                console_out(color("/vote Shall we do it?", "red") + color("  Starts a poll", "green"));
+                console_out(color("/exit", "red") + color("                  Exits the room", "green"));
             break;
 
         case 'userchange':
@@ -86,6 +97,10 @@ function chat_command(cmd, arg) {
         case 'me':
             const emote = username + " " + arg;
             socket.emit('send', { type: 'emote', message: emote });
+            break;
+
+        case 'vote':
+            socket.emit('poll', arg);
             break;
 
         case 'exit':

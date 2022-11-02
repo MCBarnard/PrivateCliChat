@@ -9,9 +9,56 @@ server.listen(PORT, () => {
     console.log(`server running at http://0.0.0.0:${PORT}`);
 });
 
+let voting = false;
+let voteTotal = 0;
+let votes = []
+
 io.on('connection', socket => {
     // Broadcast a user's message to everyone else in the room
     socket.on('send', data => {
+        console.log(data);
         io.emit('message', data);
+    });
+
+    socket.on('poll', data => {
+        if (!voting) {
+            voting = true;
+            io.emit('vote', data);
+        }
+    });
+
+    socket.on('poll-response', data => {
+        voteTotal++;
+
+        // Notify voters
+        let res = { type: 'notice', message: `${data.user} has voted`, username: data.user }
+        io.emit('message', res);
+        votes.push(data.answer);
+
+        // Complete voting?
+        let totalCanVote = io.engine.clientsCount;
+        if (totalCanVote === voteTotal) {
+            voting = false;
+            let yes = 0;
+            let no = 0;
+            let incorrectAnswer = 0;
+            votes.forEach((item, index) => {
+                if (item.toLowerCase() === 'y' || item.toLowerCase() === 'yes') {
+                    yes++;
+                } else if (item.toLowerCase() === "n" || item.toLowerCase() === "no") {
+                    no++;
+                } else {
+                    incorrectAnswer++;
+                }
+            });
+            votes = [];
+            voteTotal = 0;
+            const msg = { type: 'polled', message: `Poll results are: \nyes: ${yes}\nno: ${no}\nincorrect answer: ${incorrectAnswer}` }
+            console.log(votes)
+            console.log(msg)
+            io.emit('message', msg);
+        } else {
+            console.log((totalCanVote - voteTotal) + " still have to vote")
+        }
     });
 });
