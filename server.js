@@ -4,7 +4,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 const ngrok = require('ngrok');
-const token ='1PAnqWlO8mzWqZFOPk149eLp7FE_XYRYN6B5ryfm65qsMde9';
+const token ='';
 ngrok.authtoken(token);
 
 (async function() {
