@@ -9,10 +9,11 @@ const socket = io(config.url);
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 // Set the username
-rl.question("Please enter a nickname: ", function(name) {
+rl.question("Please enter a nickname: ", name => {
     username = name;
     const msg = username + " has joined the chat";
     socket.emit('send', { type: 'notice', message: msg });
+    console_out(color("Type /help to get help or send out a message to the world...", "yellow"));
     rl.prompt(true);
 });
 
@@ -62,16 +63,12 @@ function console_out(msg) {
 
 function chat_command(cmd, arg) {
     switch (cmd) {
-
         case 'help':
-            const help = "The following commands are available: \n" +
-                "/userchange name     This will change your display username" +
-                "/msg Bob Hi Bob      Sends a message directly to bob" +
-                "/me has done it!     Broadcasts a special message" +
-                "/exit                Exits the room";
-            username = arg;
-            console.log(help);
-            // socket.emit('send', { type: 'help', message: help });
+                console_out(color("The following commands are available:", "yellow"));
+                console_out(color("/userchange name", "red") + color("     This will change your display username", "green"));
+                console_out(color("/msg Bob Hi Bob", "red") + color("      Sends a message directly to bob", "green"));
+                console_out(color("/me has done it!", "red") + color("     Broadcasts a special message", "green"));
+                console_out(color("/exit", "red") + color("                Exits the room", "green"));
             break;
 
         case 'userchange':
