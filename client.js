@@ -5,7 +5,7 @@ const color = require("ansi-color").set;
 const config = require('./config.json')
 
 let username;
-const socket = io(config.ngrok_url);
+const socket = io(config.url);
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 // Set the username
