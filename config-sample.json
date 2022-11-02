@@ -1,3 +1,9 @@
 {
-  "url": ""
+  "environment": "local",
+  "local_url": "http://localhost:11111",
+  "live_url": "",
+  "authorization": {
+    "user": "user1",
+    "secret": "123"
+  }
 }

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const Auth = require("./ClientAuth.json");
 
 // Listen on port 11111
 const PORT = process.env.PORT || 11111;
@@ -11,7 +12,19 @@ server.listen(PORT, () => {
 
 let voting = false;
 let voteTotal = 0;
-let votes = []
+let votes = [];
+const allow_anonymous_connections = Auth.allow_unauthorized_connections;
+
+io.use((socket, next) => {
+    const user = socket.handshake.auth.user;
+    const secret = socket.handshake.auth.secret;
+    const validCredentials = Auth.clients[user] !== undefined && Auth.clients[user].secret === secret;
+    if (validCredentials || allow_anonymous_connections) {
+        next();
+    } else {
+        next(new Error("unauthorized"))
+    }
+});
 
 io.on('connection', socket => {
     // Broadcast a user's message to everyone else in the room

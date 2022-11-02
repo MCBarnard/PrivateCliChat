@@ -1,0 +1,11 @@
+{
+  "allow_unauthorized_connections": true,
+  "clients": {
+    "user1": {
+      "secret": "123"
+    },
+    "user2": {
+      "secret": "123"
+    }
+  }
+}

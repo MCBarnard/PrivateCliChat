@@ -4,9 +4,24 @@ const color = require("ansi-color").set;
 const config = require('./config.json');
 
 let username;
-const socket = io(config.url);
-const rl = readline.createInterface(process.stdin, process.stdout);
+const productionMode = config.environment === 'prod';
+let host = productionMode ? config.live_url: config.local_url;
 
+// Connect to server
+const socket = io(host, {
+    auth: {
+        user: config.authorization.user,
+        secret: config.authorization.secret
+    }
+});
+
+socket.on("connect_error", (err) => {
+    console.log(`\nConnection Error: ${err.message}`);
+    process.exit();
+});
+
+// Start interaction
+const rl = readline.createInterface(process.stdin, process.stdout);
 // Set the username
 rl.question("Please enter a nickname: ", name => {
     username = name;
