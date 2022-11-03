@@ -3,6 +3,8 @@ const { io } = require("socket.io-client");
 const color = require("ansi-color").set;
 const config = require('./config.json');
 
+const  play = player = require('play-sound')(opts = {});
+
 let username;
 const productionMode = config.environment === 'prod';
 let host = productionMode ? config.live_url: config.local_url;
@@ -49,6 +51,7 @@ socket.on('message', function (data) {
     if (data.type === 'chat' && data.username !== username) {
         leader = color("<"+data.username+"> ", "green");
         console_out(leader + data.message);
+        playPing();
     }
     else if (data.type === "exit") {
         console_out(color(data.message, 'red'));
@@ -58,16 +61,20 @@ socket.on('message', function (data) {
     }
     else if (data.type === "notice") {
         console_out(color(data.message, 'cyan'));
+        playPing();
     }
     else if (data.type === "tell" && data.to === username) {
         leader = color("["+data.from+"->"+data.to+"]", "red");
         console_out(leader + data.message);
+        playPing();
     }
     else if (data.type === "emote") {
         console_out(color(data.message, "magenta"));
+        playPing();
     }
     else if (data.type === "polled") {
         console_out(color(data.message, "yellow"));
+        playPing();
     }
 });
 
@@ -78,6 +85,12 @@ socket.on('vote', question => {
         rl.prompt(true);
     });
 });
+
+function playPing() {
+    player.play('ting.wav', {}, function(err){
+        if (err) throw err
+    });
+}
 
 function console_out(msg) {
     process.stdout.clearLine();
