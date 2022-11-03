@@ -5,6 +5,7 @@ run `cp config-sample.json config.json`
 ## Optional Settings
 Inside `ClientAuth.json`, we configure authorized users to connect. Change the usernames to whatever you see fit and 
 change `allow_unauthorized_connections` to `false` or just leave `allow_unauthorized_connections` set to `true`
+Remember that if you make your server authorized that your config.js needs to have the correct secrets set up.
 
 # Run the client
 Fill in the url inside the config.json file
