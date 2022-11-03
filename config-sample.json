@@ -1,7 +1,7 @@
 {
-  "environment": "local",
+  "environment": "prod",
   "local_url": "http://localhost:11111",
-  "live_url": "",
+  "live_url": "https://private-cli-chat.herokuapp.com",
   "authorization": {
     "user": "user1",
     "secret": "123"
