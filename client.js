@@ -94,6 +94,7 @@ function chat_command(cmd, arg) {
                 console_out(color("/msg Bob Hi Bob", "red") + color("        Sends a message directly to bob", "green"));
                 console_out(color("/me has done it!", "red") + color("       Broadcasts a special message", "green"));
                 console_out(color("/vote Shall we do it?", "red") + color("  Starts a poll", "green"));
+                console_out(color("/clear", "red") + color("                 Clears the console", "green"));
                 console_out(color("/exit", "red") + color("                  Exits the room", "green"));
             break;
 
@@ -116,6 +117,11 @@ function chat_command(cmd, arg) {
 
         case 'vote':
             socket.emit('poll', arg);
+            break;
+
+        case 'clear':
+            console.clear();
+            chat_command("help", null)
             break;
 
         case 'exit':
