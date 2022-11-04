@@ -1,13 +1,13 @@
 {
   "allow_unauthorized_connections": false,
   "clients": {
-    "user1": {
+    "maverick": {
       "secret": "123"
     },
-    "user2": {
+    "goose": {
       "secret": "123"
     },
-    "user3": {
+    "iceman": {
       "secret": "123"
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "PrivateCliChat",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CLI chat with readline and socket.io",
   "author": "Thinus Barnard",
   "type": "module",
