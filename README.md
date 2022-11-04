@@ -1,3 +1,7 @@
+# Private CLI Chat
+This project is built from the inspiration of Mr Robot's cli chat. View a preview video of the site by visiting
+[vimeo](https://vimeo.com/manage/videos/767311513)
+
 # Getting started
 run `npm install` to install all dependencies
 run `cp config-sample.json config.json`
