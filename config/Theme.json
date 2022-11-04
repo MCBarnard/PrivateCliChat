@@ -1,0 +1,27 @@
+{
+  "random-theme": true,
+  "figlet-font": "Nancyj-Fancy",
+  "figlet-font-favorites": [
+    "Speed",
+    "Whimsy",
+    "Roman",
+    "Red Phoenix",
+    "Pagga",
+    "Big Money-nw",
+    "Nancyj-Fancy",
+    "Trek"
+  ],
+  "notice": "#0000FF",
+  "user-joined": "#FFA500",
+  "user": "#00FF00",
+  "user-left": "#FF0000",
+  "message-color": "#FFFFFF",
+  "direct-message": "#FF0000",
+  "emote": "#FFA500",
+  "poll-start": "#00FF00",
+  "poll-results": "#00FFFF",
+  "notification-sound-file": "ting.wav",
+  "help": "#00FF00",
+  "help-command": "#FF0000",
+  "help-description": "#00FF00"
+}

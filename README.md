@@ -14,5 +14,11 @@ Enter a username
 Wait for it to say [username] connected
 Run `/help` in the chat for in chat options
 
+# Customizing the client
+Edit the Theme.js inside config to update colors and sounds, be sure to import the sound into the assets 
+directory and that it is a wav file. 
+
+Update the banner by changing the figlets font, here is the [cheatsheet](https://devhints.io/figlet)
+
 # Heroku
 To tail heroku logs, we need to run `heroku logs --tail`
