@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import figlet from "figlet";
 import gradient from "gradient-string";
 const player = require("play-sound")({});
-const config = require("../config/config.json");
+const config = require("../config/maverick.json");
 const theme = require("../config/Theme.json");
 
 let username = config.authorization.handle;

@@ -1,6 +1,9 @@
 {
   "allow_unauthorized_connections": false,
   "clients": {
+    "user1": {
+      "secret": "123"
+    },
     "maverick": {
       "secret": "123"
     },

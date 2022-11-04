@@ -1,6 +1,13 @@
+# TopGun Group Chat
+This is a special branch that I build for demo purposes, it allows me to similate different users connecting
+with different clients to the same chat group without wasting time in a video to reconfigure the config.js
+* `npm run maverick` to launch Maverick's client.
+* `npm run goose` to launch Goose's client.
+* `npm run iceman` to launch Iceman's client.
+
 # Getting started
-run `npm install` to install all dependencies
-run `cp config-sample.json config.json`
+* run `npm install` to install all dependencies
+* run `cp config-sample.json config.json`
 
 ## Optional Settings
 Inside `ClientAuth.json`, we configure authorized users to connect. Change the usernames to whatever you see fit and 

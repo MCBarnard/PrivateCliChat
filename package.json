@@ -18,7 +18,10 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "client": "node client/client.js"
+    "client": "node client/client.js",
+    "maverick": "node client/maverick.js",
+    "goose": "node client/goose.js",
+    "iceman": "node client/iceman.js"
   },
   "engines": {
     "node": "14.17"

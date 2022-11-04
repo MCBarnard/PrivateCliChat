@@ -2,10 +2,10 @@
   "environment": "prod",
   "local_url": "http://localhost:11111",
   "live_url": "https://private-cli-chat.herokuapp.com",
-  "chat-name": "Private Group Chat",
+  "chat-name": "Mavericks Group Chat",
   "authorization": {
-    "user": "user1",
-    "handle": "Us3R1",
+    "user": "maverick",
+    "handle": "M4v3R1cK",
     "secret": "123"
   }
 }
